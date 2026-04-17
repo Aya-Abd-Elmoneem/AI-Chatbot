@@ -31,7 +31,7 @@ with open("labels.json") as f:
 vocab_size = 1000
 embedding_dim = 16
 max_len = 20
-num_classes = len(lbl_encoder.classes_)
+num_classes = len(labels)
 
 # =====================
 # Build model architecture
