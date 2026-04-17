@@ -9,7 +9,7 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 with open("intents.json") as file:
     data = json.load(file)
 
-model = keras.models.load_model('chat_model.h5', compile=False)
+model = keras.models.load_model('chat_model.h5', compile=False, safe_mode=False)
 
 with open('tokenizer.pickle', 'rb') as handle:
     tokenizer = pickle.load(handle)
