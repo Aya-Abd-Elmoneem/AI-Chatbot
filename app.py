@@ -22,9 +22,8 @@ with open("tokenizer.json") as f:
 # =====================
 # Load label encoder
 # =====================
-import pickle
-with open("label_encoder.pickle", "rb") as f:
-    lbl_encoder = pickle.load(f)
+with open("labels.json") as f:
+    labels = json.load(f)
 
 # =====================
 # Model parameters (must match training)
@@ -62,7 +61,7 @@ def predict_class(text):
     padded = pad_sequences(seq, truncating='post', maxlen=max_len)
 
     result = model.predict(padded, verbose=0)
-    tag = lbl_encoder.inverse_transform([np.argmax(result)])[0]
+    tag = labels[np.argmax(result)]
 
     for intent in data["intents"]:
         if intent["tag"] == tag:
