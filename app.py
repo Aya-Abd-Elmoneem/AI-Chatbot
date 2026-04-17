@@ -1,27 +1,33 @@
 import streamlit as st
 import json
 import numpy as np
-import pickle
+
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Input, Embedding, GlobalAveragePooling1D
 from tensorflow.keras.preprocessing.sequence import pad_sequences
-import tensorflow.keras
-from tensorflow.keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.text import tokenizer_from_json
 
 # =====================
-# Load files
+# Load intents
 # =====================
 with open("intents.json") as file:
     data = json.load(file)
 
-with open("tokenizer.pickle", "rb") as f:
-    tokenizer = pickle.load(f)
+# =====================
+# Load tokenizer (JSON instead of pickle)
+# =====================
+with open("tokenizer.json") as f:
+    tokenizer = tokenizer_from_json(f.read())
 
+# =====================
+# Load label encoder
+# =====================
+import pickle
 with open("label_encoder.pickle", "rb") as f:
     lbl_encoder = pickle.load(f)
 
 # =====================
-# Parameters (must match training)
+# Model parameters (must match training)
 # =====================
 vocab_size = 1000
 embedding_dim = 16
@@ -67,6 +73,8 @@ def predict_class(text):
 # =====================
 # Streamlit UI
 # =====================
+st.set_page_config(page_title="AI Chatbot", page_icon="💬")
+
 st.title("💬 AI Chatbot")
 st.write("Ask me anything!")
 
