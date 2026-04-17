@@ -5,6 +5,8 @@ import pickle
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Input, Embedding, GlobalAveragePooling1D
 from tensorflow.keras.preprocessing.sequence import pad_sequences
+import tensorflow.keras
+from tensorflow.keras.preprocessing.text import Tokenizer
 
 # =====================
 # Load files
